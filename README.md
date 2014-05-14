@@ -1,9 +1,9 @@
 # list-o-matic
 
 A simple list application to demonstrate web development
-concepts. Uses the Flask web development framework, with Twitter for
-login, Bootstrap for styles, X-editable for inline editing, and
-SQLAlchemy as an ORM.
+concepts. Uses the Flask web development framework for the back end,
+and Ember for the front end. Also uses Twitter for login, Bootstrap
+for styles, and SQLAlchemy as an ORM.
 
 ## Dependencies
 
@@ -12,9 +12,7 @@ SQLAlchemy as an ORM.
 - [Flask-OAuth](http://pythonhosted.org/Flask-OAuth/)
 - [Flask-SqlAlchemy](http://pythonhosted.org/Flask-SQLAlchemy/)
 - [SqlAlchemy](http://www.sqlalchemy.org/)
-- [jQuery](http://jquery.com)
 - [Bootstrap](https://flask-login.readthedocs.org/en/latest/)
-- [X-editable](http://vitalets.github.io/x-editable/index.html)
 
 ## Installation
 
