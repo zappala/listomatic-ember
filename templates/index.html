@@ -28,18 +28,14 @@
       <input type="text" id="new-todo" placeholder="Enter a new item">
     </header>
     <ul id="todo-list">
-      <li class="completed">
-        <input type="checkbox" class="toggle">
-        <label>Learn Ember.js</label><button class="destroy"></button>
+      {% raw %}
+      {{#each}}
+      <li {{bind-attr class="isCompleted:completed"}}>
+	<input type="checkbox" class="toggle">
+	<label>{{title}}</label><button class="destroy"></button>
       </li>
-      <li>
-        <input type="checkbox" class="toggle">
-        <label>...</label><button class="destroy"></button>
-      </li>
-      <li>
-        <input type="checkbox" class="toggle">
-        <label>Profit!</label><button class="destroy"></button>
-      </li>
+      {{/each}}
+      {% endraw %}
     </ul>
   </section>
 </section>
