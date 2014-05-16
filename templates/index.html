@@ -9,12 +9,42 @@
 
 {% else %}
 
-<p><button id="item-add" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button></p>
-{% endif %}
+<section id="todoapp">
+  <header id="header">
+    <div class="row">
+      <div class="col-md-6">
+	<button type="button" class="btn btn-warning btn-md" id="clear-completed">
+          Clear completed (1)
+	</button>
+      </div>
+      <div class="right col-md-6">
+	<p><i>Double-click to edit an item</i></p>
+      </div>
+    </div>
+  </header>
 
-<div id="item-list">
-{% include 'items.html' %}
-</div>
+  <section id="main">
+    <header id="input">
+      <input type="text" id="new-todo" placeholder="Enter a new item">
+    </header>
+    <ul id="todo-list">
+      <li class="completed">
+        <input type="checkbox" class="toggle">
+        <label>Learn Ember.js</label><button class="destroy"></button>
+      </li>
+      <li>
+        <input type="checkbox" class="toggle">
+        <label>...</label><button class="destroy"></button>
+      </li>
+      <li>
+        <input type="checkbox" class="toggle">
+        <label>Profit!</label><button class="destroy"></button>
+      </li>
+    </ul>
+  </section>
+</section>
+
+{% endif %}
 
 {% endif %}
 
