@@ -10,7 +10,8 @@
 </head>
 
 <body>
-  <script type="text/x-handlebars" data-template-name="item">
+
+  <script type="text/x-handlebars" data-template-name="list">
     <nav class="navbar navbar-default" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="container">
@@ -28,15 +29,17 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	  {% if login %}
 	  <ul class="nav navbar-nav">
+	    {% raw %}
 	    <li>
-              <a href="all" class="selected">All</a>
+	      {{#link-to "list.index" activeClass="selected"}}All{{/link-to}}
             </li>
             <li>
-              <a href="active">Active</a>
+              {{#link-to "list.active" activeClass="selected"}}Active{{/link-to}}
             </li>
             <li>
-              <a href="completed">Completed</a>
+	      {{#link-to "list.completed" activeClass="selected"}}Completed{{/link-to}}
             </li>
+	    {% endraw %}
 	  </ul>
 	  <form method="get" action="/search" id="item-submit" class="navbar-form navbar-left" role="search">
 	    <div class="form-group">
@@ -53,14 +56,71 @@
 	    {% endif %}
 	  </ul>
 	</div><!-- /.navbar-collapse -->
-	<div>
+      </div>
     </nav>
 
     <div id="content" class="container">
-      {% block content %}
-      {% endblock %}
-    </div>
+      {% if login %}
+      <p>Lovingly created for <em>{{ name }}</em></p>
 
+      {% if search %}
+      <p class="search">You searched for items containing <em>{{ search|safe }}</em> </p>
+
+      {% else %}
+      {% raw %}
+      <section id="todoapp">
+	<header id="header">
+	  <div class="row">
+	    <div class="col-md-6">
+	      <p>
+		<span id="list-count" class="label label-default">
+		  <strong>{{remaining}}</strong> {{inflection}}
+		</span>
+	      </p>
+	      <p><i>Double-click to edit an item</i></p>
+	    </div>
+	    <div class="col-md-6 right">
+	      {{#if hasCompleted}}
+	      <button class="btn btn-warning btn-md" id="clear-completed" {{action "clearCompleted"}}>Clear completed ({{completed}})
+	      </button>
+	      {{/if}}
+	    </div>
+	  </div>
+	</header>
+
+	<section id="main">
+	  <header id="input">
+	    {{ input type="text" id="new-item" placeholder="Enter a new item"
+	    value=newTitle action="createItem" }}
+	  </header>
+	  {{outlet}}
+	</section>
+      </section>
+      {% endraw %}
+
+      {% endif %}
+
+      {% endif %}
+
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="list/index">
+    {% raw %}
+    <ul id="todo-list">
+      {{#each itemController="item"}}
+      <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+	{{#if isEditing}}
+	{{edit-item class="edit" value=title focus-out="acceptChanges"
+	insert-newline="acceptChanges"}}
+	{{else}}
+	{{input type="checkbox" checked=isCompleted class="toggle"}}
+	<label {{action "editItem" on="doubleClick"}}>{{title}}</label><button {{action "removeItem"}} class="destroy"></button>
+	{{/if}}
+      </li>
+      {{/each}}
+    </ul>
+    {% endraw %}
   </script>
 
   <script src="/static/js/libs/jquery-1.10.2.js"></script>
@@ -69,10 +129,12 @@
   <script src="/static/js/libs/ember-data.js"></script>
   <script src="/static/js/app.js"></script>
   <script src="/static/js/models/item.js"></script>
+  <script src="/static/js/controllers/list_controller.js"></script>
+  <script src="/static/js/controllers/item_controller.js"></script>
+  <script src="/static/js/views/edit_item_view.js"></script>
   <script src="/static/bootstrap/js/bootstrap.min.js"></script>
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <script src="/static/tests/runner.js"></script>
-  {% block scripts %}
-  {% endblock %}
+
 </body>
 </html>

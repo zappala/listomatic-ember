@@ -94,7 +94,7 @@ input[type="radio"], input[type="checkbox"] {
     font-size: 1.5em;
 }
 
-#new-todo, .edit {
+#new-item, .edit {
     position: relative;
     margin: 0;
     width: 100%;
@@ -118,7 +118,7 @@ input[type="radio"], input[type="checkbox"] {
     font-smoothing: antialiased;
 }
 
-#new-todo {
+#new-item {
     padding: 16px 16px 16px 60px;
     border: none;
     background: #efefef;
@@ -257,10 +257,18 @@ button.destroy {
     display: none;
 }
 
-#todo-list li.editing:last-child {
+tod#o-list li.editing:last-child {
     margin-bottom: -1px;
+}
+
+#list-count {
+    font-size: 1.1em;
 }
 
 .right {
     text-align: right;
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
 }

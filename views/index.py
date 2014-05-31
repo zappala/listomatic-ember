@@ -20,7 +20,7 @@ def show():
             name = current_user.username
         items = current_user.items.filter_by(completed=False).order_by(Item.due)
         completed = current_user.items.filter_by(completed=True).order_by(Item.due)
-    return render_template('index.html',login=login,name=name,
+    return render_template('base.html',login=login,name=name,
                            items=items,completed=completed)
 
 @index.route('/add',methods=['POST'])

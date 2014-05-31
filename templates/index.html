@@ -9,36 +9,55 @@
 
 {% else %}
 
-<section id="todoapp">
-  <header id="header">
-    <div class="row">
-      <div class="col-md-6">
-	<button type="button" class="btn btn-warning btn-md" id="clear-completed">
-          Clear completed (1)
-	</button>
-      </div>
-      <div class="right col-md-6">
-	<p><i>Double-click to edit an item</i></p>
-      </div>
-    </div>
-  </header>
+{% raw %}
 
-  <section id="main">
-    <header id="input">
-      <input type="text" id="new-todo" placeholder="Enter a new item">
+<script type="text/x-handlebars" data-template-name="list">
+  <section id="todoapp">
+    <header id="header">
+      <div class="row">
+	<div class="col-md-6">
+	  <p>
+	    <span id="list-count" class="label label-default">
+	      <strong>{{remaining}}</strong> {{inflection}}
+	    </span>
+	  </p>
+	  <p><i>Double-click to edit an item</i></p>
+	</div>
+	<div class="col-md-6 right">
+	  <button type="button" class="btn btn-warning btn-md" id="clear-completed">
+            Clear completed (1)
+	  </button>
+	</div>
+      </div>
     </header>
-    <ul id="todo-list">
-      {% raw %}
-      {{#each}}
-      <li {{bind-attr class="isCompleted:completed"}}>
-	<input type="checkbox" class="toggle">
-	<label>{{title}}</label><button class="destroy"></button>
-      </li>
-      {{/each}}
-      {% endraw %}
-    </ul>
+
+    <section id="main">
+      <header id="input">
+	{{ input type="text" id="new-item" placeholder="Enter a new item"
+	value=newTitle action="createItem" }}
+      </header>
+      {{outlet}}
+    </section>
   </section>
-</section>
+</script>
+
+<script type="text/x-handlebars" data-template-name="list/index">
+  <ul id="todo-list">
+    {{#each itemController="item"}}
+    <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+      {{#if isEditing}}
+      {{edit-item class="edit" value=title focus-out="acceptChanges"
+      insert-newline="acceptChanges"}}
+      {{else}}
+      {{input type="checkbox" checked=isCompleted class="toggle"}}
+      <label {{action "editItem" on="doubleClick"}}>{{title}}</label><button {{action "removeItem"}} class="destroy"></button>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</script>
+
+{% endraw %}
 
 {% endif %}
 
