@@ -24,32 +24,6 @@ App.LoginRoute = Ember.Route.extend({
     }
 });
 
-App.ApplicationAdapter = DS.RESTAdapter.extend({
-    headers: function() {
-	return {
-	    'Authorization': 'test',
-	    'ABCD': 'abc'
-	};
-    }
-});
-
-// App.AuthenticatedRoute = Ember.Route.extend({
-//     getJSONWithToken: function(url) {
-// 	var token = this.controllerFor('register').get('token');
-// 	Ember.$.ajaxPrefilter(function( options, oriOptions, jqXHR ) {
-// 	    jqXHR.setRequestHeader("Authorization", token);
-// 	});
-// 	return $.getJSON(url);
-//     },
-//     events: {
-// 	error: function(reason, transition) {
-// 	    if (reason.status == 401) {
-// 		this.transitionTo('login');
-// 	    }
-// 	}
-//     }
-// });
-
 App.ListRoute = Ember.Route.extend({
     model: function () {
 	return this.store.find('item');

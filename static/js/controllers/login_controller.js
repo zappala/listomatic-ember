@@ -38,7 +38,6 @@ App.LoginController = Ember.Controller.extend({
 	self.set('loginFailed',false);
 	$.post('/users/login', data, function(response) {
 	    self.get('controllers.application').set('loggedIn',true);
-	    //App.set('token', response.token);
 	    $.ajaxPrefilter(function( options, oriOptions, jqXHR ) {
  		jqXHR.setRequestHeader("Authorization", response.token);
  	    });
