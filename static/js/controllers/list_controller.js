@@ -1,31 +1,31 @@
 App.ListController = Ember.ArrayController.extend({
   actions: {
-    createItem: function() {
-      // Get the todo title set by the text field
-      var title = this.get('newTitle');
-      if (!title.trim()) { return; }
+      createItem: function() {
+	  // Get the todo title set by the text field
+	  var title = this.get('newTitle');
+	  if (!title.trim()) { return; }
 
-      // Create the new Todo model
-      var item = this.store.createRecord('item', {
-        title: title,
-        isCompleted: false
-      });
+	  // Create the new Todo model
+	  var item = this.store.createRecord('item', {
+              title: title,
+              isCompleted: false
+	  });
 
-      // Clear the text field
-      this.set('newTitle', '');
+	  // Clear the text field
+	  this.set('newTitle', '');
 
-      // Save the new model
-      item.save();
-    },
+	  // Save the new model
+	  item.save();
+      },
       clearCompleted: function() {
-	  var completed = this.filterBy('isCompleted', true);
+	  var completed = this.filterBy('completed', true);
 	  completed.invoke('deleteRecord');
 	  completed.invoke('save');
       },
   },
     remaining: function() {
-	return this.filterBy('isCompleted', false).get('length');
-    }.property('@each.isCompleted'),
+	return this.filterBy('completed', false).get('length');
+    }.property('@each.completed'),
 
     inflection: function() {
 	var remaining = this.get('remaining');
@@ -37,6 +37,6 @@ App.ListController = Ember.ArrayController.extend({
     }.property('completed'),
 
     completed: function() {
-	return this.filterBy('isCompleted', true).get('length');
-    }.property('@each.isCompleted'),
+	return this.filterBy('completed', true).get('length');
+    }.property('@each.completed'),
 });
