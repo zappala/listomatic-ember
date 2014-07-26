@@ -38,6 +38,9 @@
             <li>
 	      {{#link-to "list.completed" activeClass="selected"}}Completed{{/link-to}}
             </li>
+            <li>
+	      {{#link-to "logout" activeClass="selected"}}Logout{{/link-to}}
+            </li>
 	  </ul>
 	  {{/if}}
 	  <!--{% endif %}-->
@@ -127,6 +130,7 @@
   <script src="js/app.js"></script>
   <script src="js/models/login.js"></script>
   <script src="js/models/item.js"></script>
+  <script src="js/controllers/application_controller.js"></script>
   <script src="js/controllers/login_controller.js"></script>
   <script src="js/controllers/list_controller.js"></script>
   <script src="js/controllers/item_controller.js"></script>
