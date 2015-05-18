@@ -13,6 +13,7 @@ App.Router.map(function() {
 App.UnauthorizedError = Ember.Object.extend();
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
+  namespace: 'api',
   ajaxError: function(jqXHR) {
       var error = this._super(jqXHR);
       if (jqXHR && jqXHR.status === 403) {

@@ -113,7 +113,9 @@
 	    {{edit-item class="edit" value=title focus-out="acceptChanges"
 	    insert-newline="acceptChanges"}}
 	    {{else}}
-	    {{input type="checkbox" checked=completed class="toggle"}}
+   		<label class="check">
+   			{{input type="checkbox" checked=completed class="toggle"}}
+   		</label>
 	    <label {{action "editItem" on="doubleClick"}}>{{title}}</label><button {{action "removeItem"}} class="destroy"></button>
 	    {{/if}}
 	  </li>
